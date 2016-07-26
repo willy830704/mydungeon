@@ -2,30 +2,28 @@ import random
 import getch 
 # from getch import Getch as g
 import sys
+import maze as m
+import character as ch
 
-maze = [[0,0,0],[0,0,0],[0,0,0]]
+d = 5
 
-player = random.randint(0,8)
+#maze = [[0,0,0],[0,0,0],[0,0,0]]
+maze = []
+for i in range(d):
+	maze.append([])
+	for j in range(d):
+		maze[i].append(0)
 
-def init(maze,p):
-	a = p//3
-	b = p%3
-	maze[a][b] += 1
-	print(p)
 
-def clear(maze):
-	for i in range(3):
-		for j in range(3):
-			if maze[i][j]==1:
-				maze[i][j]=0
-				return [i,j]
+player = ch.player_init(d)
+boss = ch.boss_init(d,player)
+exit = ch.exit_init(d,player,boss)
 
-def pmaze(maze):
-	for i in range(3):
-		print(maze[i])
- 
-init(maze,player)	
-pmaze(maze)
+	
+m.init(d,maze,player)
+print(boss,exit,player)
+
+m.pmaze(d,maze)
 while True:
 	c = getch.getch()
 	# c = Getch()
@@ -33,32 +31,49 @@ while True:
 		sys.exit(0)
 	
 	if c=='w':
-		now = clear(maze)
+		now = m.nowpos(d,maze)
 		if now[0]==0:
-			print('Do not do it! You want to DIE?')
+			print('Don\'t go up! You want to DIE?')	
+			m.pmaze(d,maze)		
 		else:
-			x = now[0]-1
+			x = now[0]
 			y = now[1]
-			maze[x][y]=1
-			pmaze(maze)
+			maze[x][y]=0
+			maze[x-1][y]=1
+			m.pmaze(d,maze)
 	if c=='s':
-		now = clear(maze)
-		x = now[0]+1
-		y = now[1]
-		maze[x][y]=1
-		pmaze (maze)
+		now = m.nowpos(d,maze)
+		if now[0]==d-1:
+			print('Don\'t go down! You want to DIE?')
+			m.pmaze(d,maze)
+		else:
+			x = now[0]
+			y = now[1]
+			maze[x][y]=0
+			maze[x+1][y]=1
+			m.pmaze(d,maze)
 	if c=='a':
-		now = clear(maze)
-		x = now[0]
-		y = now[1]-1
-		maze[x][y]=1
-		pmaze(maze)
+		now = m.nowpos(d,maze)
+		if now[1]==0:
+			print('Don\'t go left! You want to DIE?')
+			m.pmaze(d,maze)
+		else:
+			x = now[0]
+			y = now[1]
+			maze[x][y]=0
+			maze[x][y-1]=1
+			m.pmaze(d,maze)
 	if c=='d':
-		now = clear(maze)
-		x = now[0]
-		y = now[1]+1
-		maze[x][y]=1
-		pmaze(maze)
+		now = m.nowpos(d,maze)
+		if now[1]==d-1:
+			print('Don\'t go right! You want to DIE?')
+			m.pmaze(d,maze)
+		else:
+			x = now[0]
+			y = now[1]
+			maze[x][y]=0
+			maze[x][y+1]=1
+			m.pmaze(d,maze)
 			
 
 
