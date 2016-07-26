@@ -7,29 +7,27 @@ import character as ch
 
 d = 5
 
-#maze = [[0,0,0],[0,0,0],[0,0,0]]
 maze = []
-for i in range(d):
-	maze.append([])
-	for j in range(d):
-		maze[i].append(0)
+maze_e = []
+maze_b = []
 
+maze = m.init_maze(d,maze)
+maze_e = m.init_maze(d,maze_e)
+maze_b = m.init_maze(d,maze_b)
 
-player = ch.player_init(d)
-boss = ch.boss_init(d,player)
-exit = ch.exit_init(d,player,boss)
-
+player = ch.player_init(d,maze)
+exit = ch.exit_init(d,player,maze_e)
+boss = ch.boss_init(d,player,exit,maze_b)
 	
-m.init(d,maze,player)
-print(boss,exit,player)
-
 m.pmaze(d,maze)
+m.pmaze(d,maze_e)
+m.pmaze(d,maze_b)
+
 while True:
 	c = getch.getch()
 	# c = Getch()
 	if c=='q':
-		sys.exit(0)
-	
+		sys.exit(0)	
 	if c=='w':
 		now = m.nowpos(d,maze)
 		if now[0]==0:

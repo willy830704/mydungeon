@@ -1,8 +1,9 @@
-def init(d,maze,p):
-	a = p//d
-	b = p%d
-	maze[a][b] += 1
-	print(maze)
+def init_maze(d,maze):
+	for i in range(d):
+		maze.append([])
+		for j in range(d):
+			maze[i].append(0)
+	return maze
 
 def nowpos(d,maze):
 	for i in range(d):
