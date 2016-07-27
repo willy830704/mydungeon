@@ -5,7 +5,6 @@ def player_init(d,maze):
 	x = p//d
 	y = p%d
 	maze[x][y] += 1
-	print(maze)
 	return p
 
 def exit_init(d,p,maze):
@@ -15,7 +14,6 @@ def exit_init(d,p,maze):
 			x = exit//d
 			y = exit%d
 			maze[x][y] += 1
-			print(maze)
 			return exit
 
 def boss_init(d,p,e,maze):
@@ -31,11 +29,11 @@ def boss_init(d,p,e,maze):
 			x = b//d
 			y = b%d
 			maze[x][y] += 1
-	print(maze)
 	return boss	
-
+'''
 def init(d,maze,p):
 	a = p//d
 	b = p%d
 	maze[a][b] += 1
 	print(maze)
+'''

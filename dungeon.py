@@ -5,7 +5,14 @@ import sys
 import maze as m
 import character as ch
 
-d = 5
+def message():
+	print('   w : up')
+	print('   a : left')
+	print('   s : down')
+	print('   d : right')
+	print('   q : quit')
+
+d = 6
 maze = []
 maze_e = []
 maze_b = []
@@ -17,15 +24,15 @@ player = ch.player_init(d,maze)
 exit = ch.exit_init(d,player,maze_e)
 boss = ch.boss_init(d,player,exit,maze_b)
 	
+message()
+
 m.pmaze(d,maze)
 m.pmaze(d,maze_e)
 m.pmaze(d,maze_b)
 
-m.move(d,maze_b)
-
 while True:
 	c = getch.getch()
-	
+	m.move(d,maze_b)	
 	# c = Getch()
 	if c=='q':
 		sys.exit(0)	
@@ -47,8 +54,6 @@ while True:
 				print('GoodBye~')
 				break
 			m.pmaze(d,maze)
-			m.pmaze(d,maze_e)
-			m.pmaze(d,maze_b)
 	if c=='s':
 		now = m.nowpos(d,maze)
 		if now[0]==d-1:
@@ -67,8 +72,6 @@ while True:
 				print('GoodBye~')
 				break
 			m.pmaze(d,maze)
-			m.pmaze(d,maze_e)
-			m.pmaze(d,maze_b)
 	if c=='a':
 		now = m.nowpos(d,maze)
 		if now[1]==0:
@@ -87,8 +90,6 @@ while True:
 				print('GoodBye~')
 				break
 			m.pmaze(d,maze)
-			m.pmaze(d,maze_e)
-			m.pmaze(d,maze_b)
 	if c=='d':
 		now = m.nowpos(d,maze)
 		if now[1]==d-1:
@@ -107,8 +108,7 @@ while True:
 				print('GoodBye~')
 				break
 			m.pmaze(d,maze)
-			m.pmaze(d,maze_e)
-			m.pmaze(d,maze_b)
+		
 			
 			
 
