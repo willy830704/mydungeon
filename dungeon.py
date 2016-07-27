@@ -6,14 +6,12 @@ import maze as m
 import character as ch
 
 d = 5
-
 maze = []
 maze_e = []
 maze_b = []
-
-maze = m.init_maze(d,maze)
-maze_e = m.init_maze(d,maze_e)
-maze_b = m.init_maze(d,maze_b)
+m.init_maze(d,maze)
+m.init_maze(d,maze_e)
+m.init_maze(d,maze_b)
 
 player = ch.player_init(d,maze)
 exit = ch.exit_init(d,player,maze_e)
@@ -23,8 +21,11 @@ m.pmaze(d,maze)
 m.pmaze(d,maze_e)
 m.pmaze(d,maze_b)
 
+m.move(d,maze_b)
+
 while True:
 	c = getch.getch()
+	
 	# c = Getch()
 	if c=='q':
 		sys.exit(0)	
@@ -38,7 +39,16 @@ while True:
 			y = now[1]
 			maze[x][y]=0
 			maze[x-1][y]=1
+			stat = m.check(d,maze,maze_e,maze_b)
+			cont = m.gameover(stat)
+			if cont == 1:
+				m.restart(d,maze,maze_e,maze_b,player,exit,boss)
+			elif cont == 0 :
+				print('GoodBye~')
+				break
 			m.pmaze(d,maze)
+			m.pmaze(d,maze_e)
+			m.pmaze(d,maze_b)
 	if c=='s':
 		now = m.nowpos(d,maze)
 		if now[0]==d-1:
@@ -49,7 +59,16 @@ while True:
 			y = now[1]
 			maze[x][y]=0
 			maze[x+1][y]=1
+			stat = m.check(d,maze,maze_e,maze_b)
+			cont = m.gameover(stat)
+			if cont == 1:
+				m.restart(d,maze,maze_e,maze_b,player,exit,boss)
+			elif cont == 0 :
+				print('GoodBye~')
+				break
 			m.pmaze(d,maze)
+			m.pmaze(d,maze_e)
+			m.pmaze(d,maze_b)
 	if c=='a':
 		now = m.nowpos(d,maze)
 		if now[1]==0:
@@ -60,7 +79,16 @@ while True:
 			y = now[1]
 			maze[x][y]=0
 			maze[x][y-1]=1
+			stat = m.check(d,maze,maze_e,maze_b)
+			cont = m.gameover(stat)
+			if cont == 1:
+				m.restart(d,maze,maze_e,maze_b,player,exit,boss)
+			elif cont == 0 :
+				print('GoodBye~')
+				break
 			m.pmaze(d,maze)
+			m.pmaze(d,maze_e)
+			m.pmaze(d,maze_b)
 	if c=='d':
 		now = m.nowpos(d,maze)
 		if now[1]==d-1:
@@ -71,7 +99,17 @@ while True:
 			y = now[1]
 			maze[x][y]=0
 			maze[x][y+1]=1
+			stat = m.check(d,maze,maze_e,maze_b)
+			cont = m.gameover(stat)
+			if cont == 1:
+				m.restart(d,maze,maze_e,maze_b,player,exit,boss)
+			elif cont == 0 :
+				print('GoodBye~')
+				break
 			m.pmaze(d,maze)
+			m.pmaze(d,maze_e)
+			m.pmaze(d,maze_b)
+			
 			
 
 
