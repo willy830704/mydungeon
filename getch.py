@@ -1,16 +1,16 @@
-class Getch:
+class _Getch:
     """Gets a single character from standard input.  Does not echo to the
 screen."""
     def __init__(self):
         try:
-            self.impl = GetchWindows()
+            self.impl = _GetchWindows()
         except ImportError:
-            self.impl = GetchUnix()
+            self.impl = _GetchUnix()
 
     def __call__(self): return self.impl()
 
 
-class GetchUnix:
+class _GetchUnix:
     def __init__(self):
         import tty, sys
 
@@ -26,7 +26,7 @@ class GetchUnix:
         return ch
 
 
-class GetchWindows:
+class _GetchWindows:
     def __init__(self):
         import msvcrt
 
@@ -35,5 +35,5 @@ class GetchWindows:
         return msvcrt.getch()
 
 
-getch = Getch()
+getch = _Getch()
 
