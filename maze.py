@@ -15,7 +15,16 @@ def nowpos(d,maze):
 			if maze[i][j]==1:
 				return [i,j]
 
-def pmaze(d,maze):
+def pmaze(d,maze,kind):
+	if kind == 'p':
+		head = '>_<'
+	elif kind == 'e' :
+		head = 'ESC'
+	elif kind == 'b':
+		head = '@V@'
+	elif kind == 'dead':
+		head == 'X_X'
+
 	print('  ',end='')
 	for i in range(d):
 		print("=====",end="")
@@ -27,13 +36,39 @@ def pmaze(d,maze):
 			if maze[i][j]==0:
 				print('   ',end='|')
 			else:
-				print('@_@',end='|')
+				print(head,end='|')
 		print('|')
 		print('  ',end='')
 		for j in range(d):
 			print('=====',end='')
 		print()
 	print()
+
+def choose_difficult():
+	print('Choose difficulty:')
+	print('       Easy : 1')
+	print('     Normal : 2')
+	print('       Hard : 3')
+	print('        WTF : 4')
+
+	while True:
+		hard = input("Please input a number:")
+		if hard=='1':
+			d = 3
+			break
+		elif hard == '2':
+			d = 5
+			break
+		elif hard == '3':
+			d = 7
+			break
+		elif hard == '4':
+			d = 12
+			break
+		else:
+			print('Please input the correct number !')
+	print()
+	return d
 
 def check(d,maze,maze_e,maze_b):
 	for i in range(d):

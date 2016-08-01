@@ -6,13 +6,13 @@ import maze as m
 import character as ch
 
 def message():
-	print('   w : up')
-	print('   a : left')
-	print('   s : down')
-	print('   d : right')
-	print('   q : quit')
+	print('   w : up              d : right')
+	print('   s : down            a : left')
+	print('   q : quit            h : hint')
+	print()
+	
+d = m.choose_difficult()
 
-d = 6
 maze = []
 maze_e = []
 maze_b = []
@@ -26,21 +26,20 @@ boss = ch.boss_init(d,player,exit,maze_b)
 	
 message()
 
-m.pmaze(d,maze)
-m.pmaze(d,maze_e)
-m.pmaze(d,maze_b)
+m.pmaze(d,maze,'p')
 
 while True:
 	c = getch.getch()
-	m.move(d,maze_b)	
+	
 	# c = Getch()
 	if c=='q':
 		sys.exit(0)	
 	if c=='w':
+		m.move(d,maze_b)	
 		now = m.nowpos(d,maze)
 		if now[0]==0:
 			print('Don\'t go up! You want to DIE?')	
-			m.pmaze(d,maze)		
+			m.pmaze(d,maze,'p')		
 		else:
 			x = now[0]
 			y = now[1]
@@ -53,12 +52,13 @@ while True:
 			elif cont == 0 :
 				print('GoodBye~')
 				break
-			m.pmaze(d,maze)
+			m.pmaze(d,maze,'p')
 	if c=='s':
+		m.move(d,maze_b)	
 		now = m.nowpos(d,maze)
 		if now[0]==d-1:
 			print('Don\'t go down! You want to DIE?')
-			m.pmaze(d,maze)
+			m.pmaze(d,maze,'p')
 		else:
 			x = now[0]
 			y = now[1]
@@ -71,12 +71,13 @@ while True:
 			elif cont == 0 :
 				print('GoodBye~')
 				break
-			m.pmaze(d,maze)
+			m.pmaze(d,maze,'p')
 	if c=='a':
+		m.move(d,maze_b)	
 		now = m.nowpos(d,maze)
 		if now[1]==0:
 			print('Don\'t go left! You want to DIE?')
-			m.pmaze(d,maze)
+			m.pmaze(d,maze,'p')
 		else:
 			x = now[0]
 			y = now[1]
@@ -89,12 +90,13 @@ while True:
 			elif cont == 0 :
 				print('GoodBye~')
 				break
-			m.pmaze(d,maze)
+			m.pmaze(d,maze,'p')
 	if c=='d':
+		m.move(d,maze_b)	
 		now = m.nowpos(d,maze)
 		if now[1]==d-1:
 			print('Don\'t go right! You want to DIE?')
-			m.pmaze(d,maze)
+			m.pmaze(d,maze,'p')
 		else:
 			x = now[0]
 			y = now[1]
@@ -107,7 +109,11 @@ while True:
 			elif cont == 0 :
 				print('GoodBye~')
 				break
-			m.pmaze(d,maze)
+			m.pmaze(d,maze,'p')
+	if c == 'h':
+		m.pmaze(d,maze,'p')
+		m.pmaze(d,maze_e,'e')
+		m.pmaze(d,maze_b,'b')
 		
 			
 			
